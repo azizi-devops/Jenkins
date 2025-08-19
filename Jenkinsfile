@@ -106,34 +106,6 @@ pipeline {
                     }
                     
                 }
-
-
-            stage('Ansible deploy to stage') {
-                steps {
-
-                 ansiblePlaybook([
-                 playbook: 'ansible/vpro-app-setup.yml',
-                 inventory: 'ansible/stage.inventory',
-                 installation: 'ansible',
-                 credentialsId: 'applogin',
-                 disableHostKeyChecking: true,
-                 colorized: true,
-                 extraVars: [
-                    USER: "admin",   //"${env.NEXUS_USER}",
-                    PASS: "admin123",               //"${env.NEXUS_PASS}",
-			        nexusip: "172.31.82.94",   //"${env.NEXUSIP}",
-			        reponame: "vprofile-release",    //"${env.RELEASE_REPO}",
-			        groupid: "QA",
-			        time: "${env.BUILD_TIMESTAMP}",
-			        build: "${env.BUILD_ID}",
-                    artifactid: "vprofile",
-			        vprofile_version: "vprofile-${env.BUILD_ID}-${env.BUILD_TIMESTAMP}.war"]
-                 ])
-}
-                }
-            
-               
-
             }
 
 
@@ -145,6 +117,7 @@ pipeline {
                               message: "*${currentBuild.currentResult}:* Job '${env.JOB_NAME}' build (${env.BUILD_NUMBER}) , \n more info at ${env.BUILD_URL} "
                 }
    
+
 	    
         }
     }
