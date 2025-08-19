@@ -16,13 +16,21 @@ pipeline {
 		NEXUS_PASS = 'admin123'
 		RELEASE_REPO = 'vprofile-release'
 		CENTRAL_REPO = 'vpro-maven-central'
-		NEXUSIP = '172.31.82.94'
+		NEXUSIP = '172.31.88.228'
 		NEXUSPORT = '8081'
 		NEXUS_GRP_REPO = 'vpro-maven-group'
         NEXUS_LOGIN = 'nexuslogin'
         SONARSERVER = 'sonarserver'
         SONARSCANNER = 'sonarscanner'
+        RegistryCredential = 'ecr:us-east-1:awscred2'
+        EcrRegistry = '688567289752.dkr.ecr.us-east-1.amazonaws.com'
+        IMAGE_NAME = 'vprofile-web-app'
+        vprofileRegistry = 'https://688567289752.dkr.ecr.us-east-1.amazonaws.com'
+        CLUSTER_NAME = 'vproapp-cluster'
+        SERVICE_NAME = 'vprofile-task-2-service-moyvgwbf'
     }
+
+    
 
     stages {
         stage('Build'){
@@ -74,16 +82,15 @@ pipeline {
             
         }
 
-      stage('Qulity Gate') {
+        stage('Qulity Gate') {
                 steps {
                     echo "Waiting for SonarQube Quality Gate"
                     timeout(time: 10, unit: 'MINUTES') {
-                  waitForQualityGate abortPipeline: true
+                        waitForQualityGate abortPipeline: true
                     }
                 }
             }
 
-            
             stage('Upload Artifacts to Nexus') {
                
                         steps {
@@ -106,19 +113,36 @@ pipeline {
                     }
                     
                 }
+
+        stage('Build App Image') {
+            steps {
+                script {
+                    dockerImage = docker.build( "${EcrRegistry}/${IMAGE_NAME}" , "./Docker-files/app/multistage" )
+                }
+            }
+
             }
 
 
-            post {
-                always {
-                    echo "Slack Notification"
-                    slackSend channel: '#vprofile-jenkins',
-                              color: COLOR_MAP[currentBuild.currentResult],
-                              message: "*${currentBuild.currentResult}:* Job '${env.JOB_NAME}' build (${env.BUILD_NUMBER}) , \n more info at ${env.BUILD_URL} "
+        stage('Push Image to ECR') {
+            steps {
+                script {
+                    docker.withRegistry( "${vprofileRegistry}", "${RegistryCredential}" ) {
+                        dockerImage.push("${BUILD_NUMBER}")
+                        dockerImage.push("latest")
+                    }
                 }
-   
-
-	    
+            }
         }
-    }
 
+        stage('Deploy to ECS') {
+            steps {
+                withAWS( credentials: 'awscred2', region: 'us-east-1' ) {
+                    sh 'aws ecs update-service --cluster ${CLUSTER_NAME} --service ${SERVICE_NAME} --force-new-deployment'
+                }
+            }
+        }
+
+            
+    }
+}
