@@ -1,9 +1,9 @@
 # Prerequisites
-####
+#
 - JDK 17 or 21
 - Maven 3.9
 - MySQL 8
-####
+
 # Technologies 
 - Spring MVC
 - Spring Security
@@ -22,5 +22,4 @@ sql dump file:
 - db_backup.sql file is a mysql dump file.we have to import this dump to mysql db server
 - > mysql -u <user_name> -p accounts < db_backup.sql
 
-#n
-#ecs
+
