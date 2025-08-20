@@ -22,7 +22,7 @@ sql dump file:
 - db_backup.sql file is a mysql dump file.we have to import this dump to mysql db server
 - > mysql -u <user_name> -p accounts < db_backup.sql
 
-##########################################################################################################################
+############################################################################################
 # 🚀 Continuous Delivery of Java Web Application on AWS
 
 This project demonstrates how to set up a complete **CI/CD pipeline** for deploying a Java web application on **AWS ECS** using modern DevOps tools.
