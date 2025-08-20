@@ -75,7 +75,7 @@ The pipeline automates **build → test → artifact management → code quality
 
 ## 🔧 Git Integration
 
-![GitHub SSH Setup](images/github-ssh.png)
+![GitHub SSH Setup](images/git.png)
 
 - Create SSH keys and add them to GitHub  
 - Configure `~/.ssh/config` for multiple accounts  
