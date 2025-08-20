@@ -65,7 +65,7 @@ The pipeline automates **build → test → artifact management → code quality
 
 ### SonarQube Instance  
 
-![SonarQube Dashboard](images/sonarqube.png)
+![SonarQube Dashboard](images/sonar.png)
 
 - **AMI:** Ubuntu  
 - **Type:** `t2.medium`  
