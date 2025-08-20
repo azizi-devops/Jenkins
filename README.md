@@ -138,7 +138,7 @@ This ensures smooth and automated deployments with minimal downtime.
 
 ## 📚 Source Code
 
-👉 [azizi-devops/vprofile-project](https://github.com/azizi-devops/vprofile-project)
+👉 [azizi-devops/vprofile-project](https://github.com/azizi-devops/Jenkins/tree/jenkins-cicd)
 
 ---
 
