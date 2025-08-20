@@ -85,13 +85,13 @@ The following tools are used in this project:
 
 ## 🖼️ Jenkins Pipeline View
 
-![Jenkins Pipeline](images/jenkins-pipeline.png)
+![Jenkins Pipeline](images/jen-cicd-2.png)
 
 ---
 
 ## 🖼️ ECS Deployment
 
-![ECS Deployment](images/ecs-deployment.png)
+![ECS Deployment](images/jen-cicd-3.png)
 
 ---
 
@@ -149,17 +149,3 @@ This ensures smooth and automated deployments with minimal downtime.
 - Scalable ECS-based architecture  
 - Continuous feedback via Slack & SonarQube  
 
----
-
-## 📸 Screenshots
-
-- Pipeline Overview  
-  ![Pipeline](images/pipeline-overview.png)
-
-- Nexus Artifacts  
-  ![Nexus](images/nexus.png)
-
-- SonarQube Reports  
-  ![SonarQube](images/sonarqube.png)
-
----
