@@ -101,26 +101,3 @@ The pipeline automates **build → test → artifact management → code quality
 ## 📂 Source Code
 👉 [GitHub Repository](https://github.com/azizi-devops/Jenkins/tree/jenkins-ci)  
 
----
-
-## 📸 Screenshots Needed
-✅ Jenkins Dashboard  
-✅ Nexus Repository Configuration  
-✅ SonarQube Analysis Report  
-✅ Slack Notification Example  
-✅ VS Code Integration  
-
-*(Upload screenshots into an `images/` folder and update the links in this README.)*  
-
----
-
-## 📌 Requirements
-- AWS Account  
-- GitHub Account  
-- Slack Workspace  
-- VS Code (optional for development)  
-
----
-
-## 📜 License
-MIT License – see the [LICENSE](LICENSE) file for details  
