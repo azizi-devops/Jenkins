@@ -24,7 +24,7 @@ The pipeline automates **build → test → artifact management → code quality
 
 ## 🛠️ AWS Setup
 
-![AWS EC2 Setup](images/aws-setup.png)
+
 
 1. **Login to AWS Account**  
    - Use AWS Console to provision EC2 instances  
@@ -41,7 +41,7 @@ The pipeline automates **build → test → artifact management → code quality
 
 ### Jenkins Instance  
 
-![Jenkins Dashboard](images/jenkins-dashboard.png)
+![Jenkins Dashboard](images/jenkins.png)
 
 - **AMI:** Ubuntu  
 - **Type:** `t2.small`  
@@ -51,7 +51,7 @@ The pipeline automates **build → test → artifact management → code quality
 
 ### Nexus Instance  
 
-![Nexus Repository Setup](images/nexus-repositories.png)
+![Nexus Repository Setup](images/nexus.png)
 
 - **AMI:** Amazon Linux 2023  
 - **Type:** `t2.medium`  
@@ -65,7 +65,7 @@ The pipeline automates **build → test → artifact management → code quality
 
 ### SonarQube Instance  
 
-![SonarQube Dashboard](images/sonarqube-dashboard.png)
+![SonarQube Dashboard](images/sonar.png)
 
 - **AMI:** Ubuntu  
 - **Type:** `t2.medium`  
