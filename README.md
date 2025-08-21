@@ -147,4 +147,4 @@ Automated deployments with AWS Elastic Beanstalk
 
 Notifications integrated with Slack
 
-👨‍💻 Author: Hani Karim Azizi 📂 Repo: azizi-devops/vprofile-project
+👨‍💻 Author: Karim Azizi 📂 Repo: [azizi-devops/vprofile-project](https://github.com/azizi-devops/Jenkins/tree/ci-jenbean-stage)
