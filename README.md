@@ -124,7 +124,7 @@ Step 7: Run Production Deployment
 
   ***Note***
  You may encounter an error like this during execution:
-![Architecture](jb7.png)
+![Architecture](images/jb7.png)
 Click on the sentence with the red underline to open another page for approval. Repeat this process 4 times, and in the end, you will have a page like the one shown below:
 ![Architecture](images/jb8.png)
 After that your pipline runs seccessfully .
