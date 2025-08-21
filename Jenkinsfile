@@ -22,6 +22,12 @@ pipeline {
         NEXUS_LOGIN = 'nexuslogin'
         SONARSERVER = 'sonarserver'
         SONARSCANNER = 'sonarscanner'
+        ARTIFACT_NAME = "vprofile-v${env.BUILD_ID}.war"
+        AWS_S3_BUCKET = 'vprocicdbean-10.08'
+        AWS_EB_APP_NAME = 'vproapp'
+        AWS_EB_ENVIRONMENT = 'Vproapp-env'
+        AWS_EB_APP_VERSION = "${BUILD_ID}"
+
     }
 
     stages {
@@ -108,31 +114,20 @@ pipeline {
                 }
 
 
-            stage('Ansible deploy to stage') {
-                steps {
+            stage('Deploy to Stage Bean'){
+          steps {
+            withAWS(credentials: 'awsbeancreds', region: 'us-east-1') {
+               sh """
+                   aws s3 cp ./target/vprofile-v2.war s3://$AWS_S3_BUCKET/${ARTIFACT_NAME}
+                   aws elasticbeanstalk create-application-version --application-name $AWS_EB_APP_NAME --version-label $AWS_EB_APP_VERSION --source-bundle S3Bucket=$AWS_S3_BUCKET,S3Key=${ARTIFACT_NAME}
+                   aws elasticbeanstalk update-environment --application-name $AWS_EB_APP_NAME --environment-name $AWS_EB_ENVIRONMENT --version-label $AWS_EB_APP_VERSION
+                """
+            }
+          }
+        }
 
-                 ansiblePlaybook([
-                 playbook: 'ansible/vpro-app-setup.yml',
-                 inventory: 'ansible/stage.inventory',
-                 installation: 'ansible',
-                 credentialsId: 'applogin',
-                 disableHostKeyChecking: true,
-                 colorized: true,
-                 extraVars: [
-                    USER: "admin",   //"${env.NEXUS_USER}",
-                    PASS: "admin123",               //"${env.NEXUS_PASS}",
-			        nexusip: "172.31.82.94",   //"${env.NEXUSIP}",
-			        reponame: "vprofile-release",    //"${env.RELEASE_REPO}",
-			        groupid: "QA",
-			        time: "${env.BUILD_TIMESTAMP}",
-			        build: "${env.BUILD_ID}",
-                    artifactid: "vprofile",
-			        vprofile_version: "vprofile-${env.BUILD_ID}-${env.BUILD_TIMESTAMP}.war"]
-                 ])
-}
-                }
-            
-               
+
+
 
             }
 
@@ -145,7 +140,7 @@ pipeline {
                               message: "*${currentBuild.currentResult}:* Job '${env.JOB_NAME}' build (${env.BUILD_NUMBER}) , \n more info at ${env.BUILD_URL} "
                 }
    
+
 	    
         }
     }
-
